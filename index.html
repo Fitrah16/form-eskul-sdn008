@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendaftaran Ekstrakurikuler SDN 008 PURNAMA</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f9ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .thanks {
+      margin-top: 20px;
+      text-align: center;
+      color: #555;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Pendaftaran Ekstrakurikuler<br>SDN 008 PURNAMA</h2>
+    <form id="eskulForm">
+      <label for="nama">Nama Siswa:</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="kelas">Kelas:</label>
+      <input type="text" id="kelas" name="kelas" required>
+
+      <label for="ekstrakurikuler">Ekstrakurikuler:</label>
+      <select id="ekstrakurikuler" name="ekstrakurikuler" required>
+        <option value="">-- Pilih --</option>
+        <option value="Kompang">Kompang</option>
+        <option value="Tari">Tari</option>
+        <option value="Gambar">Gambar</option>
+        <option value="Pantomim">Pantomim</option>
+        <option value="Solo Song">Solo Song</option>
+        <option value="Rebana">Rebana</option>
+      </select>
+
+      <button type="submit">Daftar</button>
+    </form>
+    <div class="thanks" id="thankYou">Terima kasih sudah mendaftar!</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('eskulForm');
+    const thankYou = document.getElementById('thankYou');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const url = "https://script.google.com/macros/s/AKfycbw2dk1O4s_vzD323ksQSYhbnb_cjYEH4jv-ZRZgOCDLG7_jayQedSyJeIZ_0J7Aow/exec";
+
+      fetch(url, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        form.reset();
+        thankYou.style.display = "block";
+      })
+      .catch(error => alert('Gagal mengirim data.'));
+    });
+  </script>
+</body>
+</html>
